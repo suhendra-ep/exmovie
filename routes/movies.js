@@ -15,7 +15,15 @@ router.route('/')
             movie.save(function(err, data){
                 if(err)
                     return (500, err);
-                return res.json(data);
+                console.log(data._id);
+                Movie
+                    .findOne({_id: data._id})
+                    .populate({path: 'genre'})
+                    .exec(function(err, result){
+                        if(err)
+                            return res.send(500, err);
+                        return res.json(result);
+                    });
             });
         })
         .get(function(req, res){

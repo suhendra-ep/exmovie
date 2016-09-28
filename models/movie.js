@@ -1,10 +1,10 @@
 var mongoose = require('mongoose');
-
-var MovieSchema = new mongoose.Schema({
+var Schema = mongoose.Schema;
+var MovieSchema = new Schema({
     title: String,
     releaseYear: String,
     director: String,
-    genre: String,
+    genre: { type : Schema.Types.ObjectId, ref : 'Genre' },
 });
 
 mongoose.model('Movie', MovieSchema);

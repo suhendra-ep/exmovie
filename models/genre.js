@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-var GenreSchema = new mongoose.Schema({
+var GenreSchema = new Schema({
     genre: String,
 });
 
