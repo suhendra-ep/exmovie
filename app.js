@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 // Initialize mongoose schema
 require('./models/movie');
 require('./models/genre');
+require('./models/director');
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/exmovie');
@@ -16,6 +17,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var movies = require('./routes/movies');
 var genre = require('./routes/genre');
+var director = require('./routes/director');
 
 var app = express();
 
@@ -35,6 +37,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/movies', movies);
 app.use('/genre', genre);
+app.use('/director', director);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
