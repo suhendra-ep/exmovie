@@ -27,11 +27,14 @@ router.route('/')
             });
         })
         .get(function(req, res){
-            Movie.find(function(err, data){
-                if(err)
-                    return (500, err);
-                return res.json(data);
-            });
+            Movie
+                .find()
+                .populate({path: 'genre'})
+                .exec(function(err, data){
+                    if(err)
+                        return (500, err);
+                    return res.json(data);
+                });
         })
 
 router.route('/:movieId')
