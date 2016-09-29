@@ -18,7 +18,10 @@ router.route('/')
                 console.log(data._id);
                 Movie
                     .findOne({_id: data._id})
-                    .populate({path: 'genre'})
+                    .populate({
+                        path: 'genre',
+                        select: 'genre'
+                    })
                     .exec(function(err, result){
                         if(err)
                             return res.send(500, err);
@@ -29,7 +32,10 @@ router.route('/')
         .get(function(req, res){
             Movie
                 .find()
-                .populate({path: 'genre'})
+                .populate({
+                    path: 'genre',
+                    select: 'genre'
+                })
                 .exec(function(err, data){
                     if(err)
                         return (500, err);
@@ -39,11 +45,23 @@ router.route('/')
 
 router.route('/:movieId')
         .get(function(req, res){
-            Movie.findById(req.params.movieId, function(err, data){
+            /*Movie.findById(req.params.movieId, function(err, data){
                 if(err)
                     return res.send(500, err);
                 return res.json(data);
-            });
+            });*/
+             Movie
+                .findById(req.params.movieId)
+                .populate({
+                    path: 'genre',
+                    select: 'genre'
+                })
+                .exec(function(err, result){
+                    if(err)
+                        return res.send(500, err);
+                    return res.json(result);
+                });
+
         })
         .put(function(req, res){
             Movie.findById(req.params.movieId, function(err, movie){
